@@ -1,8 +1,9 @@
 var React = require("react");
 var axios = require("axios");
 
+//CHILDREN COMPONENETS
 var Form = require("./children/form");
-var Results = require("./children/Results");
+var Results = require("./children/results");
 var Saved = require("./children/saved_articles");
 
 var Main = React.CreatClass({
@@ -13,22 +14,23 @@ var Main = React.CreatClass({
 			startYear: "",
 			endYear: "",
 			results: [],
-			history: [],
+			history: []
 		};
 	},
 	componentDidMoount: function() {
 		axios.get("/api/saved").then(function(res) {
 			if (res !== this.state.history) {
-				this.setState({ history: res.data});
+				this.setState({ history: res.data });
 			}
 		}.bing(this));
 	}, 
 	componentDidUpdate: function() {
 		if (this.state.topicSearched != "") {
 			var queryString = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-			var apiKey = "?api-key=743707e5f8f44f1ca8c6aab3a1a11f39";
-			var topic = '&q=' + this.state.topicSearched;
-			var endYear = '&end_date=' + this.state.endYear.split('-').join('');
+            var apiKey = "?api-key=743707e5f8f44f1ca8c6aab3a1a11f39"
+            var topic = '&q=' + this.state.topicSearched;
+            var startYear = '&begin_date=' + this.state.startYear.split('-').join('');
+            var endYear = '&end_date=' + this.state.endYear.split('-').join('');
 
 			var query = queryString + apiKey + topic + startYear + endYear;
 
@@ -42,10 +44,11 @@ var Main = React.CreatClass({
 
 				var queryResults = [];
 
-				for(var i = 0; i < 10; i++) {
+				for(var i = 0; i < 5; i++) {
+					var date = res.data.res.docs[i].pub_date.split("T");
 					date = date[0];
 					var artticleObj = {
-						abstract: res.data.res.docs[i].pub_date.split("T");
+						abstract: res.data.res.docs[i].abstract,
 						pub_date: date,
 						web_url: res.date.res.docs[i].web_url
 					}
@@ -99,7 +102,7 @@ var Main = React.CreatClass({
 				<Results articles={this.state.results} setSave={this.setSave} />
 				<Saved savedArticles={this.state.history} setDelete={this.setDelete} />
 			</div>
-			);
+		);
 	}
 
 });

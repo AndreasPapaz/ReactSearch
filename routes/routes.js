@@ -4,11 +4,11 @@ var Article = ("./../models/Article.js");
 
 // ++++++++++ +++ +++++++++++//
 router.get("/api/saved", function(req,res) {
-	Article.find({}, function(err, aricles) {
+	Article.find({}, function(err, aricle) {
 		if (err) {
 			console.log(err);
 		} else {
-			res.json(aricles)
+			res.json(aricle);
 		}
 	});
 });
@@ -41,7 +41,7 @@ router.delete("/api/saved/:id", function(req, res) {
 
 router.get("*", function(req, res) {
 	var dir = __dirname;
-	var dirSplit = dir.split("controller");
+	var dirSplit = dir.split("routes");
 	dir = dirSplit[0];
 
 	res.sendFile(dir + '/public/index.html');
