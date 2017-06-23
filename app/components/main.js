@@ -27,7 +27,7 @@ var Main = React.CreatClass({
 	componentDidUpdate: function() {
 		if (this.state.topicSearched != "") {
 			var queryString = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-            var apiKey = "?api-key=743707e5f8f44f1ca8c6aab3a1a11f39"
+            var apiKey = "?api-key=2f8e0c73aef54f02b8d0ee3a956babcd"
             var topic = '&q=' + this.state.topicSearched;
             var startYear = '&begin_date=' + this.state.startYear.split('-').join('');
             var endYear = '&end_date=' + this.state.endYear.split('-').join('');
