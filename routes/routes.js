@@ -39,7 +39,6 @@ router.delete("/api/saved/:id", function(req, res) {
 	});
 });
 
-//LOOK HERE< THIs is where my problems lie
 router.get("*", function(req, res) {
 	var dir = __dirname;
 	var dirSplit = dir.split("controller");
