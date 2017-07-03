@@ -5,7 +5,6 @@ html {
 }
 
 body {
-    background: #F1F1F1 url('../img/groovepaper/groovepaper.png');
     margin-bottom: 62px;
     height: auto;
     color: whitesmoke;
@@ -33,7 +32,6 @@ footer .container {
 }
 
 .result-div {
-    background: #D3BCCC url('../img/groovepaper/groovepaper_@2X.png');
     padding: 0;
 }
 
