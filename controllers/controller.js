@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var Article = require('../model/article');
+var Article = require('../model/article.js');
 
 // GET SAVED DOCS
 router.get('/api/saved', function(req, res) {
