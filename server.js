@@ -1,35 +1,35 @@
-var express = require("express");
+var express = require('express');
+var path = require('path');
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+// ES6 set up
+mongoose.Promise = Promise;
+
 var app = express();
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 var PORT = process.env.PORT || 3000;
 
-
-// ++++++++++  MONGO DB SET UP +++++++++++//
-mongoose.connect("mongodb://localhost/ReactSearch");
-
-var db = mongoose.connection;
-
-db.on("error", function(error) {
-	console.log("mongose err ", error)
-});
-db.once("open", function() {
-	console.log("mongoose connection successful");
-});
-
-// ++++++++++  Middleware +++++++++++//
+//body parser set up
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: "application/vnd.api+json "}));
-app.use(express.static(__dirname + '/public'));
 
-// ++++++++++  Routes +++++++++++//
-var routes = require("./routes/routes.js");
-app.use("/", routes);
+// ROUTES
+var routes = require('./controllers/controller');
+app.use('/', routes);
 
-// ++++++++++  Server Start +++++++++++//
-app.listen(PORT, function() {
-	console.log("YOU ARE ON PORT " + PORT);
+// USE LOCALHOST OR ENV
+var connectionString;
+if(process.env.PORT) {
+	connectionString = 'mongodb://heroku_vzp76p0g:dcjn3749ehveosgf312p30s2vp@ds145952.mlab.com:45952/heroku_vzp76p0g';
+} else {
+	connectionString = 'mongodb://localhost/nytreact';
+}
+
+mongoose.connect(connectionString).then(function() {
+	app.listen(PORT, function() {
+		console.log('LISTENING ON PORT : ' + PORT);
+	});
 });
