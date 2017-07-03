@@ -21,15 +21,14 @@ var routes = require('./controllers/controller');
 app.use('/', routes);
 
 // USE LOCALHOST OR ENV
-var connectionString;
-if(process.env.PORT) {
-	connectionString = 'mongodb://heroku_vzp76p0g:dcjn3749ehveosgf312p30s2vp@ds145952.mlab.com:45952/heroku_vzp76p0g';
-} else {
-	connectionString = 'mongodb://localhost/nytreact';
-}
+// var connectionString;
+// if(process.env.PORT) {
+// 	connectionString = 'mongodb://heroku_vzp76p0g:dcjn3749ehveosgf312p30s2vp@ds145952.mlab.com:45952/heroku_vzp76p0g';
+// } else {
+// 	connectionString = 'mongodb://localhost/nytreact';
+// }
+mongoose.connect('mongodb://heroku_vzp76p0g:dcjn3749ehveosgf312p30s2vp@ds145952.mlab.com:45952/heroku_vzp76p0g');
 
-mongoose.connect(connectionString).then(function() {
-	app.listen(PORT, function() {
-		console.log('LISTENING ON PORT : ' + PORT);
-	});
+app.listen(PORT, function() {
+	console.log('LISTENING ON PORT : ' + PORT);
 });
