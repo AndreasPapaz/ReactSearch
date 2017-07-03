@@ -64,5 +64,16 @@ router.use('*', function(req, res) {
 
 	res.sendFile(dir + '/public/index.html');
 });
+// router.get("/", function(req, res) {
+// 	Article.find().sort("-time").exec(function(err, article) {
+// 		if (err) {
+// 			console.log("Error from routes " + err);
+// 		}
+// 		else {
+// 			res.render("scrape.handlebars", { articles: article });
+// 		}
+// 	});
+// });
+
 
 module.exports = router;
